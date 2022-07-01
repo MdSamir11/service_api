@@ -1,7 +1,7 @@
 import "./App.css";
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
-import {AddContact} from './components/AddContact';
+import {AddContact} from './components/Login';
 import { Contacts } from "./components/contacts";
 import { PrivateRoute } from "./components/PrivateRoute";
 function App() {

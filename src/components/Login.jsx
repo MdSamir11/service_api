@@ -9,10 +9,7 @@ import {Link} from 'react-router-dom';
 export const AddContact = () => {
   // const history=useHistory();
   const classes = styles();
-  var allPhones =[];
-  const [contacts, setContacts] = useState([]);
   const [inputField, setInputField] = useState({ username: "", password: "" });
-  const [view, setView] = useState(false);
   const [usernameValidation,setuserNameValidation] = useState();
   const [passwordValidation,setPasswordValidation] = useState();
   var history = useHistory();
@@ -25,35 +22,9 @@ export const AddContact = () => {
     name = e.target.name;
     value = e.target.value;
     setInputField({ ...inputField, [name]: value });
-    if(inputField.phone && inputField.phone.length>4){
-      for(var elem of contacts)
-      {
-        if(elem.phone.includes(inputField.phone))
-        {
-          console.log("Exist")
-          setView(true);
-        }else{
-          console.log("Not exist")
-          // setView(false);
-        }
-      }}
   };
-  // useEffect(async() => {
-  //   const header ={
-  //     "Accept":"*/*",
-  //     "Accept-Encoding":"gzib,deflate,br",
-  //     "Connection":"keep-alive",
-  //     "x-access-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjU2NTY5MTA0LCJleHAiOjE2NTY2NTU1MDR9.qYmELN-CJbXcvxmuXFiNwdMLFMbNfruosluCQsCnj6o"
-  //   }
-  //   axios.get("http://54.219.23.63:3000/serviceapp/api/customer",header)
-  //     .then(res=>{
-  //       console.log("48-->",res)
-  //     })
-  // }, []);
   const submit = async (e) => {
     e.preventDefault();
-    console.log("28-->",inputField);
-    console.log(contacts);
     if(inputField.username ==="" && inputField.password==="")
     {
       setuserNameValidation(true);
@@ -77,9 +48,9 @@ export const AddContact = () => {
             localStorage.setItem("Token",res.data.accessToken)
             alert("Login Success");
             history.push("/all-contacts")
-          } else {
-            alert("Something went wrong");
           }
+        }).catch(()=>{
+          alert("User Not found")
         });
   };
   return (
